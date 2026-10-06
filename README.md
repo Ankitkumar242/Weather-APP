@@ -189,7 +189,18 @@ SkyPulse is a certified, installable Progressive Web App:
 
 ## 🤖 Android Native App (Capacitor)
 
-SkyPulse can be compiled directly into a native Android APK / AAB using Capacitor:
+### 📲 Direct Phone Download (One-Click APK Install)
+You can download and install SkyPulse directly on your Android phone without setting up a development environment:
+
+- ⬇️ **[Download SkyPulse-v1.0-debug.apk](https://github.com/Ankitkumar242/Weather-APP/releases/latest/download/SkyPulse-v1.0-debug.apk)** (Direct APK Download)
+- 📦 **[View Latest GitHub Release](https://github.com/Ankitkumar242/Weather-APP/releases)**
+
+**Quick Phone Installation Steps:**
+1. Tap the download link above on your phone's browser.
+2. Once downloaded, open your notifications or **Downloads** folder and tap `SkyPulse-v1.0-debug.apk`.
+3. If prompted by Android with *"Install unknown apps"*, tap **Settings** and toggle **"Allow from this source"**.
+4. Tap **Install** and then **Open**! Enjoy native weather on your phone.
+
 
 ### 1. Architecture
 - The native wrapper lives in `/mobile`.
