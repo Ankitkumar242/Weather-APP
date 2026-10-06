@@ -41,8 +41,14 @@ jobs:
       - name: Make Gradlew Executable
         run: chmod +x mobile/android/gradlew
 
+      - name: Accept Android SDK Licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Build Debug APK with Gradle
         working-directory: ./mobile/android
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
         run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Find and Prepare Output APK
