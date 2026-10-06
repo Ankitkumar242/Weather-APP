@@ -4,6 +4,8 @@
 .ambient-bg {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  max-width: 100%;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;

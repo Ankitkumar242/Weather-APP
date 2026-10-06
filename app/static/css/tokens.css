@@ -13,7 +13,7 @@
   --font-2xl: 1.5rem;
   --font-3xl: 2rem;
   --font-4xl: 2.75rem;
-  --font-hero: 4.5rem;
+  --font-hero: clamp(2.75rem, 10vw, 4.5rem);
 
   /* Font Weights */
   --fw-normal: 400;
