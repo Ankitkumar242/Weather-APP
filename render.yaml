@@ -19,3 +19,4 @@ services:
         value: SkyPulseWeatherApp/1.0 (contact: support@skypulse.app)
       - key: RATE_LIMIT_DEFAULT
         value: 60/minute
+

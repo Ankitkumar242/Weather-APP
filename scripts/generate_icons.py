@@ -168,3 +168,4 @@ create_icon(180, maskable=False).save(os.path.join(ICONS_DIR, "apple-touch-icon.
 create_icon(32, maskable=False).save(os.path.join(ICONS_DIR, "favicon.png"))
 
 print("Generated icon-192.png, icon-512.png, maskables, and apple-touch-icon.png successfully.")
+

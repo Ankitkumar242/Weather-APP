@@ -79,3 +79,4 @@ async def test_cors_locked_configuration(async_client: AsyncClient) -> None:
         },
     )
     assert resp_unauth.headers.get("access-control-allow-origin") is None
+

@@ -77,3 +77,4 @@ if (fs.existsSync(offlineSrc)) {
 }
 
 console.log('✨ Capacitor webDir build complete!');
+

@@ -38,3 +38,4 @@ if (fs.existsSync(gradlewPath)) {
   console.log(`3. Run: cd android && ${gradlewCmd} ${targetTask}`);
   process.exit(0);
 }
+

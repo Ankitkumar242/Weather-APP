@@ -37,3 +37,4 @@ if os.path.exists(splash_path):
     splash_img.resize((1080, 1920), Image.Resampling.LANCZOS).save(os.path.join(drawable_dir, "splash.png"))
 
 print("Populated Android mipmap icons and drawable splash successfully.")
+

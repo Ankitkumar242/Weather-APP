@@ -62,3 +62,4 @@ splash.paste(scaled_icon, (paste_x, paste_y), scaled_icon)
 splash.save(os.path.join(ASSETS_DIR, "splash.png"))
 
 print("Generated mobile assets: icon.png, icon-foreground.png, icon-background.png, splash.png")
+
