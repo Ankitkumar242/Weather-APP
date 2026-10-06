@@ -78,8 +78,10 @@ jobs:
             
             Download and install the APK directly on your Android phone!
             
-            ### ⬇️ Download APK:
-            - **[SkyPulse-v1.0-debug.apk](release-artifacts/SkyPulse-v1.0-debug.apk)**
+            ### ⬇️ Direct Download APK:
+            - **[Download SkyPulse-v1.0-debug.apk](https://github.com/Ankitkumar242/Weather-APP/releases/download/v1.0.0-${{ github.run_number }}/SkyPulse-v1.0-debug.apk)** (Click to download directly)
+            
+            *(Or scroll down to the **Assets** section below and tap `SkyPulse-v1.0-debug.apk`)*
             
             ### 📲 Phone Installation:
             1. Download the `.apk` file onto your phone.
