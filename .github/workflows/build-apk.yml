@@ -23,6 +23,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK Licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -43,12 +49,13 @@ jobs:
 
       - name: Build Debug APK with Gradle
         working-directory: ./mobile/android
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
-      - name: Rename APK for Easy Download
+      - name: Find and Prepare Output APK
         run: |
           mkdir -p release-artifacts
-          cp mobile/android/app/build/outputs/apk/debug/app-debug.apk release-artifacts/SkyPulse-v1.0-debug.apk
+          find mobile/android/app/build/outputs/apk -name "*.apk" -exec cp {} release-artifacts/SkyPulse-v1.0-debug.apk \;
+          ls -la release-artifacts/
 
       - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
@@ -57,9 +64,9 @@ jobs:
           path: release-artifacts/SkyPulse-v1.0-debug.apk
           retention-days: 30
 
-      - name: Create GitHub Release with APK (Optional)
-        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      - name: Create GitHub Release with APK
         uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
         with:
           tag_name: v1.0.0-${{ github.run_number }}
           name: SkyPulse Android App v1.0.${{ github.run_number }}
@@ -71,15 +78,14 @@ jobs:
             
             Download and install the APK directly on your Android phone!
             
-            ### ⬇️ Download
+            ### ⬇️ Download APK:
             - **[SkyPulse-v1.0-debug.apk](release-artifacts/SkyPulse-v1.0-debug.apk)**
             
-            ### 📲 Installation Instructions:
+            ### 📲 Phone Installation:
             1. Download the `.apk` file onto your phone.
             2. Tap the file in your notifications or Downloads folder.
-            3. Tap **Install** (if prompted, enable *Allow from this source*).
-            4. Open the app and enjoy precision weather intelligence!
+            3. Tap **Install** (allow from unknown sources if prompted).
+            4. Open the app to enjoy precision weather forecasts!
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
-
