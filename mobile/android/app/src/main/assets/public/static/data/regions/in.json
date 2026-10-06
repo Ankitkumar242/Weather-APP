@@ -1,0 +1,1482 @@
+[
+  {
+    "name": "Andhra Pradesh",
+    "slug": "andhra-pradesh",
+    "type": "state",
+    "capital": "Amaravati",
+    "lat": 16.573,
+    "lon": 80.3575,
+    "cities": [
+      {
+        "name": "Amaravati",
+        "lat": 16.573,
+        "lon": 80.3575,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Visakhapatnam",
+        "lat": 17.6801,
+        "lon": 83.2016,
+        "population": 1063178,
+        "is_capital": false
+      },
+      {
+        "name": "Vijayawada",
+        "lat": 16.5074,
+        "lon": 80.6466,
+        "population": 1143232,
+        "is_capital": false
+      },
+      {
+        "name": "Guntur",
+        "lat": 16.2997,
+        "lon": 80.4573,
+        "population": 670073,
+        "is_capital": false
+      },
+      {
+        "name": "Tirupati",
+        "lat": 13.6355,
+        "lon": 79.4199,
+        "population": 295323,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Arunachal Pradesh",
+    "slug": "arunachal-pradesh",
+    "type": "state",
+    "capital": "Itanagar",
+    "lat": 27.0844,
+    "lon": 93.6053,
+    "cities": [
+      {
+        "name": "Itanagar",
+        "lat": 27.0844,
+        "lon": 93.6053,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Naharlagun",
+        "lat": 27.1047,
+        "lon": 93.6952,
+        "population": 36158,
+        "is_capital": false
+      },
+      {
+        "name": "Pasighat",
+        "lat": 28.0663,
+        "lon": 95.3268,
+        "population": 25581,
+        "is_capital": false
+      },
+      {
+        "name": "Tawang",
+        "lat": 27.5742,
+        "lon": 91.795,
+        "population": 11202,
+        "is_capital": false
+      },
+      {
+        "name": "Ziro",
+        "lat": 27.595,
+        "lon": 93.8385,
+        "population": 13893,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Assam",
+    "slug": "assam",
+    "type": "state",
+    "capital": "Dispur",
+    "lat": 26.1433,
+    "lon": 91.7898,
+    "cities": [
+      {
+        "name": "Dispur",
+        "lat": 26.1433,
+        "lon": 91.7898,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Guwahati",
+        "lat": 26.1844,
+        "lon": 91.7458,
+        "population": 962334,
+        "is_capital": false
+      },
+      {
+        "name": "Silchar",
+        "lat": 24.8273,
+        "lon": 92.7979,
+        "population": 178865,
+        "is_capital": false
+      },
+      {
+        "name": "Dibrugarh",
+        "lat": 27.4799,
+        "lon": 94.9084,
+        "population": 145488,
+        "is_capital": false
+      },
+      {
+        "name": "Jorhat",
+        "lat": 26.7575,
+        "lon": 94.2031,
+        "population": 126736,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Bihar",
+    "slug": "bihar",
+    "type": "state",
+    "capital": "Patna",
+    "lat": 25.5941,
+    "lon": 85.1376,
+    "cities": [
+      {
+        "name": "Patna",
+        "lat": 25.5941,
+        "lon": 85.1376,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Gaya",
+        "lat": 24.7969,
+        "lon": 85.0038,
+        "population": 474093,
+        "is_capital": false
+      },
+      {
+        "name": "Bhagalpur",
+        "lat": 25.2445,
+        "lon": 86.9718,
+        "population": 400146,
+        "is_capital": false
+      },
+      {
+        "name": "Muzaffarpur",
+        "lat": 26.1226,
+        "lon": 85.3906,
+        "population": 354462,
+        "is_capital": false
+      },
+      {
+        "name": "Darbhanga",
+        "lat": 26.1522,
+        "lon": 85.8971,
+        "population": 296039,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Chhattisgarh",
+    "slug": "chhattisgarh",
+    "type": "state",
+    "capital": "Raipur",
+    "lat": 21.2514,
+    "lon": 81.6296,
+    "cities": [
+      {
+        "name": "Raipur",
+        "lat": 21.2514,
+        "lon": 81.6296,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Bhilai",
+        "lat": 21.2092,
+        "lon": 81.4285,
+        "population": 627734,
+        "is_capital": false
+      },
+      {
+        "name": "Bilāspur",
+        "lat": 22.08,
+        "lon": 82.1554,
+        "population": 365579,
+        "is_capital": false
+      },
+      {
+        "name": "Korba",
+        "lat": 22.3458,
+        "lon": 82.6963,
+        "population": 419146,
+        "is_capital": false
+      },
+      {
+        "name": "Durg",
+        "lat": 21.1915,
+        "lon": 81.2762,
+        "population": 268806,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Goa",
+    "slug": "goa",
+    "type": "state",
+    "capital": "Panaji",
+    "lat": 15.4909,
+    "lon": 73.8278,
+    "cities": [
+      {
+        "name": "Panaji",
+        "lat": 15.4909,
+        "lon": 73.8278,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Madgaon",
+        "lat": 15.275,
+        "lon": 73.9579,
+        "population": 87650,
+        "is_capital": false
+      },
+      {
+        "name": "Vasco da Gama",
+        "lat": 15.3958,
+        "lon": 73.8157,
+        "population": 100485,
+        "is_capital": false
+      },
+      {
+        "name": "Mapusa",
+        "lat": 15.5915,
+        "lon": 73.809,
+        "population": 40122,
+        "is_capital": false
+      },
+      {
+        "name": "Ponda",
+        "lat": 15.4034,
+        "lon": 74.0152,
+        "population": 22664,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Gujarat",
+    "slug": "gujarat",
+    "type": "state",
+    "capital": "Gandhinagar",
+    "lat": 23.2156,
+    "lon": 72.6369,
+    "cities": [
+      {
+        "name": "Gandhinagar",
+        "lat": 23.2156,
+        "lon": 72.6369,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Ahmedabad",
+        "lat": 23.0258,
+        "lon": 72.5873,
+        "population": 6357693,
+        "is_capital": false
+      },
+      {
+        "name": "Surat",
+        "lat": 21.1959,
+        "lon": 72.8302,
+        "population": 4591246,
+        "is_capital": false
+      },
+      {
+        "name": "Vadodara",
+        "lat": 22.2994,
+        "lon": 73.2081,
+        "population": 1822221,
+        "is_capital": false
+      },
+      {
+        "name": "Rajkot",
+        "lat": 22.2916,
+        "lon": 70.7932,
+        "population": 1390640,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Haryana",
+    "slug": "haryana",
+    "type": "state",
+    "capital": "Chandigarh",
+    "lat": 30.7333,
+    "lon": 76.7794,
+    "cities": [
+      {
+        "name": "Chandigarh",
+        "lat": 30.7333,
+        "lon": 76.7794,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Faridabad",
+        "lat": 28.4112,
+        "lon": 77.3132,
+        "population": 1414050,
+        "is_capital": false
+      },
+      {
+        "name": "Gurugram",
+        "lat": 28.4601,
+        "lon": 77.0263,
+        "population": 886519,
+        "is_capital": false
+      },
+      {
+        "name": "Panipat",
+        "lat": 29.3875,
+        "lon": 76.9682,
+        "population": 295970,
+        "is_capital": false
+      },
+      {
+        "name": "Ambāla",
+        "lat": 30.361,
+        "lon": 76.7978,
+        "population": 195153,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Himachal Pradesh",
+    "slug": "himachal-pradesh",
+    "type": "state",
+    "capital": "Shimla",
+    "lat": 31.1048,
+    "lon": 77.1734,
+    "cities": [
+      {
+        "name": "Shimla",
+        "lat": 31.1048,
+        "lon": 77.1734,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Dharamshala",
+        "lat": 27.1598,
+        "lon": 77.7688,
+        "population": null,
+        "is_capital": false
+      },
+      {
+        "name": "Mandi",
+        "lat": 31.7119,
+        "lon": 76.9327,
+        "population": 28217,
+        "is_capital": false
+      },
+      {
+        "name": "Solan",
+        "lat": 30.9091,
+        "lon": 77.1087,
+        "population": 40283,
+        "is_capital": false
+      },
+      {
+        "name": "Kullu",
+        "lat": 31.9583,
+        "lon": 77.1082,
+        "population": 19831,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Jharkhand",
+    "slug": "jharkhand",
+    "type": "state",
+    "capital": "Ranchi",
+    "lat": 23.3441,
+    "lon": 85.3096,
+    "cities": [
+      {
+        "name": "Ranchi",
+        "lat": 23.3441,
+        "lon": 85.3096,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Jamshedpur",
+        "lat": 22.8028,
+        "lon": 86.1855,
+        "population": 1339438,
+        "is_capital": false
+      },
+      {
+        "name": "Dhanbad",
+        "lat": 23.7976,
+        "lon": 86.4299,
+        "population": 1196214,
+        "is_capital": false
+      },
+      {
+        "name": "Bokaro",
+        "lat": 23.6693,
+        "lon": 86.1516,
+        "population": 564319,
+        "is_capital": false
+      },
+      {
+        "name": "Deoghar",
+        "lat": 24.4898,
+        "lon": 86.699,
+        "population": 203123,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Karnataka",
+    "slug": "karnataka",
+    "type": "state",
+    "capital": "Bengaluru",
+    "lat": 12.9716,
+    "lon": 77.5946,
+    "cities": [
+      {
+        "name": "Bengaluru",
+        "lat": 12.9716,
+        "lon": 77.5946,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Mysuru",
+        "lat": 12.2979,
+        "lon": 76.6393,
+        "population": 920550,
+        "is_capital": false
+      },
+      {
+        "name": "Hubballi",
+        "lat": 15.3478,
+        "lon": 75.1338,
+        "population": 943788,
+        "is_capital": false
+      },
+      {
+        "name": "Mangaluru",
+        "lat": 12.9172,
+        "lon": 74.856,
+        "population": 499487,
+        "is_capital": false
+      },
+      {
+        "name": "Belagavi",
+        "lat": 15.8521,
+        "lon": 74.5045,
+        "population": 490045,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Kerala",
+    "slug": "kerala",
+    "type": "state",
+    "capital": "Thiruvananthapuram",
+    "lat": 8.5241,
+    "lon": 76.9366,
+    "cities": [
+      {
+        "name": "Thiruvananthapuram",
+        "lat": 8.5241,
+        "lon": 76.9366,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Kochi",
+        "lat": 9.9399,
+        "lon": 76.2602,
+        "population": 633553,
+        "is_capital": false
+      },
+      {
+        "name": "Kozhikode",
+        "lat": 11.248,
+        "lon": 75.7804,
+        "population": 550440,
+        "is_capital": false
+      },
+      {
+        "name": "Kollam",
+        "lat": 8.8811,
+        "lon": 76.5847,
+        "population": 367107,
+        "is_capital": false
+      },
+      {
+        "name": "Thrissur",
+        "lat": 10.5167,
+        "lon": 76.2167,
+        "population": 315957,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Madhya Pradesh",
+    "slug": "madhya-pradesh",
+    "type": "state",
+    "capital": "Bhopal",
+    "lat": 23.2599,
+    "lon": 77.4126,
+    "cities": [
+      {
+        "name": "Bhopal",
+        "lat": 23.2599,
+        "lon": 77.4126,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Indore",
+        "lat": 22.7179,
+        "lon": 75.8333,
+        "population": 1994397,
+        "is_capital": false
+      },
+      {
+        "name": "Jabalpur",
+        "lat": 23.167,
+        "lon": 79.9501,
+        "population": 1081677,
+        "is_capital": false
+      },
+      {
+        "name": "Gwalior",
+        "lat": 26.2298,
+        "lon": 78.1734,
+        "population": 1054420,
+        "is_capital": false
+      },
+      {
+        "name": "Ujjain",
+        "lat": 23.1824,
+        "lon": 75.7764,
+        "population": 515215,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Maharashtra",
+    "slug": "maharashtra",
+    "type": "state",
+    "capital": "Mumbai",
+    "lat": 19.076,
+    "lon": 72.8777,
+    "cities": [
+      {
+        "name": "Mumbai",
+        "lat": 19.076,
+        "lon": 72.8777,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Pune",
+        "lat": 18.5196,
+        "lon": 73.8554,
+        "population": 3124458,
+        "is_capital": false
+      },
+      {
+        "name": "Nagpur",
+        "lat": 21.1463,
+        "lon": 79.0849,
+        "population": 2405665,
+        "is_capital": false
+      },
+      {
+        "name": "Nashik",
+        "lat": 19.9973,
+        "lon": 73.791,
+        "population": 1486053,
+        "is_capital": false
+      },
+      {
+        "name": "Aurangabad",
+        "lat": 19.8776,
+        "lon": 75.3423,
+        "population": 1175116,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Manipur",
+    "slug": "manipur",
+    "type": "state",
+    "capital": "Imphal",
+    "lat": 24.817,
+    "lon": 93.9368,
+    "cities": [
+      {
+        "name": "Imphal",
+        "lat": 24.817,
+        "lon": 93.9368,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Thoubāl",
+        "lat": 24.6388,
+        "lon": 93.9964,
+        "population": 45947,
+        "is_capital": false
+      },
+      {
+        "name": "Bishnupur",
+        "lat": 24.6285,
+        "lon": 93.7618,
+        "population": 12167,
+        "is_capital": false
+      },
+      {
+        "name": "Churāchāndpur",
+        "lat": 24.3335,
+        "lon": 93.67,
+        "population": 47774,
+        "is_capital": false
+      },
+      {
+        "name": "Ukhrul",
+        "lat": 25.1196,
+        "lon": 94.3642,
+        "population": 27187,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Meghalaya",
+    "slug": "meghalaya",
+    "type": "state",
+    "capital": "Shillong",
+    "lat": 25.5788,
+    "lon": 91.8933,
+    "cities": [
+      {
+        "name": "Shillong",
+        "lat": 25.5788,
+        "lon": 91.8933,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Tura",
+        "lat": 25.5142,
+        "lon": 90.2024,
+        "population": 74858,
+        "is_capital": false
+      },
+      {
+        "name": "Jowai",
+        "lat": 25.436,
+        "lon": 92.1913,
+        "population": 28430,
+        "is_capital": false
+      },
+      {
+        "name": "Nongpoh",
+        "lat": 25.9023,
+        "lon": 91.8769,
+        "population": 17055,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Mizoram",
+    "slug": "mizoram",
+    "type": "state",
+    "capital": "Aizawl",
+    "lat": 23.7271,
+    "lon": 92.7176,
+    "cities": [
+      {
+        "name": "Aizawl",
+        "lat": 23.7271,
+        "lon": 92.7176,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Lunglei",
+        "lat": 22.8925,
+        "lon": 92.7422,
+        "population": 57011,
+        "is_capital": false
+      },
+      {
+        "name": "Serchhīp",
+        "lat": 23.2931,
+        "lon": 92.8468,
+        "population": 21158,
+        "is_capital": false
+      },
+      {
+        "name": "Kolasib",
+        "lat": 24.2239,
+        "lon": 92.6787,
+        "population": 25000,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Nagaland",
+    "slug": "nagaland",
+    "type": "state",
+    "capital": "Kohima",
+    "lat": 25.6751,
+    "lon": 94.1086,
+    "cities": [
+      {
+        "name": "Kohima",
+        "lat": 25.6751,
+        "lon": 94.1086,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Dimāpur",
+        "lat": 25.9117,
+        "lon": 93.7217,
+        "population": 135860,
+        "is_capital": false
+      },
+      {
+        "name": "Mokokchūng",
+        "lat": 26.3248,
+        "lon": 94.5183,
+        "population": 35913,
+        "is_capital": false
+      },
+      {
+        "name": "Tuensang",
+        "lat": 26.267,
+        "lon": 94.8242,
+        "population": 36774,
+        "is_capital": false
+      },
+      {
+        "name": "Wokha",
+        "lat": 26.0972,
+        "lon": 94.2582,
+        "population": 54010,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Odisha",
+    "slug": "odisha",
+    "type": "state",
+    "capital": "Bhubaneswar",
+    "lat": 20.2961,
+    "lon": 85.8245,
+    "cities": [
+      {
+        "name": "Bhubaneswar",
+        "lat": 20.2961,
+        "lon": 85.8245,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Cuttack",
+        "lat": 20.465,
+        "lon": 85.8793,
+        "population": 610189,
+        "is_capital": false
+      },
+      {
+        "name": "Rourkela",
+        "lat": 22.225,
+        "lon": 84.8641,
+        "population": 273317,
+        "is_capital": false
+      },
+      {
+        "name": "Puri",
+        "lat": 19.7982,
+        "lon": 85.8249,
+        "population": 200564,
+        "is_capital": false
+      },
+      {
+        "name": "Sambalpur",
+        "lat": 21.4653,
+        "lon": 83.9757,
+        "population": 189366,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Punjab",
+    "slug": "punjab",
+    "type": "state",
+    "capital": "Chandigarh",
+    "lat": 30.7333,
+    "lon": 76.7794,
+    "cities": [
+      {
+        "name": "Chandigarh",
+        "lat": 30.7333,
+        "lon": 76.7794,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Ludhiana",
+        "lat": 30.912,
+        "lon": 75.8538,
+        "population": 1618879,
+        "is_capital": false
+      },
+      {
+        "name": "Amritsar",
+        "lat": 31.6223,
+        "lon": 74.8753,
+        "population": 1159227,
+        "is_capital": false
+      },
+      {
+        "name": "Jalandhar",
+        "lat": 31.3256,
+        "lon": 75.5792,
+        "population": 868929,
+        "is_capital": false
+      },
+      {
+        "name": "Patiāla",
+        "lat": 30.3362,
+        "lon": 76.3922,
+        "population": 446246,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Rajasthan",
+    "slug": "rajasthan",
+    "type": "state",
+    "capital": "Jaipur",
+    "lat": 26.9124,
+    "lon": 75.7873,
+    "cities": [
+      {
+        "name": "Jaipur",
+        "lat": 26.9124,
+        "lon": 75.7873,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Jodhpur",
+        "lat": 26.2684,
+        "lon": 73.0059,
+        "population": 1056191,
+        "is_capital": false
+      },
+      {
+        "name": "Kota",
+        "lat": 25.1825,
+        "lon": 75.8391,
+        "population": 1001694,
+        "is_capital": false
+      },
+      {
+        "name": "Bikaner",
+        "lat": 28.0176,
+        "lon": 73.3149,
+        "population": 644406,
+        "is_capital": false
+      },
+      {
+        "name": "Udaipur",
+        "lat": 24.5858,
+        "lon": 73.7135,
+        "population": 451100,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Sikkim",
+    "slug": "sikkim",
+    "type": "state",
+    "capital": "Gangtok",
+    "lat": 27.3389,
+    "lon": 88.6065,
+    "cities": [
+      {
+        "name": "Gangtok",
+        "lat": 27.3389,
+        "lon": 88.6065,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Namchi",
+        "lat": 27.1649,
+        "lon": 88.3638,
+        "population": 12190,
+        "is_capital": false
+      },
+      {
+        "name": "Gyalshing",
+        "lat": 27.2895,
+        "lon": 88.2576,
+        "population": 4013,
+        "is_capital": false
+      },
+      {
+        "name": "Mangan",
+        "lat": 27.5097,
+        "lon": 88.5221,
+        "population": 4644,
+        "is_capital": false
+      },
+      {
+        "name": "Rangpo",
+        "lat": 27.1773,
+        "lon": 88.5336,
+        "population": 10450,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Tamil Nadu",
+    "slug": "tamil-nadu",
+    "type": "state",
+    "capital": "Chennai",
+    "lat": 13.0827,
+    "lon": 80.2707,
+    "cities": [
+      {
+        "name": "Chennai",
+        "lat": 13.0827,
+        "lon": 80.2707,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Coimbatore",
+        "lat": 11.0055,
+        "lon": 76.9661,
+        "population": 2136916,
+        "is_capital": false
+      },
+      {
+        "name": "Madurai",
+        "lat": 9.919,
+        "lon": 78.1195,
+        "population": 1465625,
+        "is_capital": false
+      },
+      {
+        "name": "Tiruchirappalli",
+        "lat": 10.8155,
+        "lon": 78.6965,
+        "population": 1022518,
+        "is_capital": false
+      },
+      {
+        "name": "Salem",
+        "lat": 11.6538,
+        "lon": 78.1554,
+        "population": 917414,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Telangana",
+    "slug": "telangana",
+    "type": "state",
+    "capital": "Hyderabad",
+    "lat": 17.385,
+    "lon": 78.4867,
+    "cities": [
+      {
+        "name": "Hyderabad",
+        "lat": 17.385,
+        "lon": 78.4867,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Warangal",
+        "lat": 18.0,
+        "lon": 79.5833,
+        "population": 704570,
+        "is_capital": false
+      },
+      {
+        "name": "Nizāmābād",
+        "lat": 18.6715,
+        "lon": 78.0988,
+        "population": 311152,
+        "is_capital": false
+      },
+      {
+        "name": "Karīmnagar",
+        "lat": 18.4392,
+        "lon": 79.1286,
+        "population": 289821,
+        "is_capital": false
+      },
+      {
+        "name": "Khammam",
+        "lat": 17.2477,
+        "lon": 80.1437,
+        "population": 196283,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Tripura",
+    "slug": "tripura",
+    "type": "state",
+    "capital": "Agartala",
+    "lat": 23.8315,
+    "lon": 91.2868,
+    "cities": [
+      {
+        "name": "Agartala",
+        "lat": 23.8315,
+        "lon": 91.2868,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Dharmanagar",
+        "lat": 24.3667,
+        "lon": 92.1667,
+        "population": 40595,
+        "is_capital": false
+      },
+      {
+        "name": "Udaipur",
+        "lat": 23.5333,
+        "lon": 91.4833,
+        "population": 32758,
+        "is_capital": false
+      },
+      {
+        "name": "Kailāshahar",
+        "lat": 24.332,
+        "lon": 92.0039,
+        "population": 22405,
+        "is_capital": false
+      },
+      {
+        "name": "Belonia",
+        "lat": 23.2518,
+        "lon": 91.4541,
+        "population": 19996,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Uttar Pradesh",
+    "slug": "uttar-pradesh",
+    "type": "state",
+    "capital": "Lucknow",
+    "lat": 26.8467,
+    "lon": 80.9462,
+    "cities": [
+      {
+        "name": "Lucknow",
+        "lat": 26.8467,
+        "lon": 80.9462,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Kanpur",
+        "lat": 26.4652,
+        "lon": 80.3498,
+        "population": 2823249,
+        "is_capital": false
+      },
+      {
+        "name": "Varanasi",
+        "lat": 25.3167,
+        "lon": 83.0104,
+        "population": 1164404,
+        "is_capital": false
+      },
+      {
+        "name": "Agra",
+        "lat": 27.1833,
+        "lon": 78.0167,
+        "population": 1430055,
+        "is_capital": false
+      },
+      {
+        "name": "Prayagraj",
+        "lat": 25.4448,
+        "lon": 81.8432,
+        "population": 1073438,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Uttarakhand",
+    "slug": "uttarakhand",
+    "type": "state",
+    "capital": "Dehradun",
+    "lat": 30.3165,
+    "lon": 78.0322,
+    "cities": [
+      {
+        "name": "Dehradun",
+        "lat": 30.3165,
+        "lon": 78.0322,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Haridwar",
+        "lat": 29.9479,
+        "lon": 78.1603,
+        "population": 186079,
+        "is_capital": false
+      },
+      {
+        "name": "Roorkee",
+        "lat": 29.8663,
+        "lon": 77.8912,
+        "population": 103894,
+        "is_capital": false
+      },
+      {
+        "name": "Haldwani",
+        "lat": 29.2225,
+        "lon": 79.5286,
+        "population": 139497,
+        "is_capital": false
+      },
+      {
+        "name": "Nainital",
+        "lat": 29.3974,
+        "lon": 79.4469,
+        "population": 42309,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "West Bengal",
+    "slug": "west-bengal",
+    "type": "state",
+    "capital": "Kolkata",
+    "lat": 22.5726,
+    "lon": 88.3639,
+    "cities": [
+      {
+        "name": "Kolkata",
+        "lat": 22.5726,
+        "lon": 88.3639,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Siliguri",
+        "lat": 26.71,
+        "lon": 88.4285,
+        "population": 515574,
+        "is_capital": false
+      },
+      {
+        "name": "Asansol",
+        "lat": 23.6833,
+        "lon": 86.9833,
+        "population": 504271,
+        "is_capital": false
+      },
+      {
+        "name": "Durgapur",
+        "lat": 23.5158,
+        "lon": 87.308,
+        "population": 518872,
+        "is_capital": false
+      },
+      {
+        "name": "Howrah",
+        "lat": 22.5769,
+        "lon": 88.3186,
+        "population": 1027672,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Andaman & Nicobar Islands",
+    "slug": "andaman-nicobar-islands",
+    "type": "ut",
+    "capital": "Port Blair",
+    "lat": 11.6234,
+    "lon": 92.7265,
+    "cities": [
+      {
+        "name": "Port Blair",
+        "lat": 11.6234,
+        "lon": 92.7265,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Diglipur",
+        "lat": 13.2667,
+        "lon": 93.0,
+        "population": 42877,
+        "is_capital": false
+      },
+      {
+        "name": "Mayabunder",
+        "lat": 12.9095,
+        "lon": 92.9035,
+        "population": 23912,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Chandigarh",
+    "slug": "chandigarh",
+    "type": "ut",
+    "capital": "Chandigarh",
+    "lat": 30.7333,
+    "lon": 76.7794,
+    "cities": [
+      {
+        "name": "Chandigarh",
+        "lat": 30.7333,
+        "lon": 76.7794,
+        "population": null,
+        "is_capital": true
+      }
+    ]
+  },
+  {
+    "name": "Dadra & Nagar Haveli and Daman & Diu",
+    "slug": "dadra-nagar-haveli-and-daman-diu",
+    "type": "ut",
+    "capital": "Daman",
+    "lat": 20.3974,
+    "lon": 72.8328,
+    "cities": [
+      {
+        "name": "Daman",
+        "lat": 20.3974,
+        "lon": 72.8328,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Diu",
+        "lat": 20.7141,
+        "lon": 70.9822,
+        "population": 23991,
+        "is_capital": false
+      },
+      {
+        "name": "Silvassa",
+        "lat": 20.2739,
+        "lon": 72.9967,
+        "population": 98265,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Delhi",
+    "slug": "delhi",
+    "type": "ut",
+    "capital": "New Delhi",
+    "lat": 28.6139,
+    "lon": 77.209,
+    "cities": [
+      {
+        "name": "New Delhi",
+        "lat": 28.6139,
+        "lon": 77.209,
+        "population": null,
+        "is_capital": true
+      }
+    ]
+  },
+  {
+    "name": "Jammu & Kashmir",
+    "slug": "jammu-kashmir",
+    "type": "ut",
+    "capital": "Srinagar",
+    "lat": 34.0837,
+    "lon": 74.7973,
+    "cities": [
+      {
+        "name": "Srinagar",
+        "lat": 34.0837,
+        "lon": 74.7973,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Jammu",
+        "lat": 32.7353,
+        "lon": 74.8617,
+        "population": 576198,
+        "is_capital": false
+      },
+      {
+        "name": "Anantnag",
+        "lat": 33.7307,
+        "lon": 75.1542,
+        "population": 150592,
+        "is_capital": false
+      },
+      {
+        "name": "Udhampur",
+        "lat": 32.9243,
+        "lon": 75.1357,
+        "population": 84015,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Ladakh",
+    "slug": "ladakh",
+    "type": "ut",
+    "capital": "Leh",
+    "lat": 34.1526,
+    "lon": 77.5771,
+    "cities": [
+      {
+        "name": "Leh",
+        "lat": 34.1526,
+        "lon": 77.5771,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Kargil",
+        "lat": 34.5577,
+        "lon": 76.1262,
+        "population": 16338,
+        "is_capital": false
+      },
+      {
+        "name": "Diskit",
+        "lat": 34.5469,
+        "lon": 77.5563,
+        "population": null,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Lakshadweep",
+    "slug": "lakshadweep",
+    "type": "ut",
+    "capital": "Kavaratti",
+    "lat": 10.5667,
+    "lon": 72.6417,
+    "cities": [
+      {
+        "name": "Kavaratti",
+        "lat": 10.5667,
+        "lon": 72.6417,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Agatti",
+        "lat": 10.8352,
+        "lon": 72.1822,
+        "population": 7700,
+        "is_capital": false
+      },
+      {
+        "name": "Andrott",
+        "lat": 10.8119,
+        "lon": 73.6741,
+        "population": 11191,
+        "is_capital": false
+      }
+    ]
+  },
+  {
+    "name": "Puducherry",
+    "slug": "puducherry",
+    "type": "ut",
+    "capital": "Puducherry",
+    "lat": 11.9416,
+    "lon": 79.8083,
+    "cities": [
+      {
+        "name": "Puducherry",
+        "lat": 11.9416,
+        "lon": 79.8083,
+        "population": null,
+        "is_capital": true
+      },
+      {
+        "name": "Kāraikāl",
+        "lat": 10.9167,
+        "lon": 79.8333,
+        "population": 86838,
+        "is_capital": false
+      },
+      {
+        "name": "Mahe",
+        "lat": 11.7017,
+        "lon": 75.5347,
+        "population": 41816,
+        "is_capital": false
+      },
+      {
+        "name": "Yanam",
+        "lat": 16.7331,
+        "lon": 82.2136,
+        "population": 55626,
+        "is_capital": false
+      }
+    ]
+  }
+]

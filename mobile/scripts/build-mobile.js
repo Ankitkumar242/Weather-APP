@@ -48,8 +48,8 @@ let indexHtml = fs.readFileSync(templatePath, 'utf8');
 // Replace Jinja2 variables
 indexHtml = indexHtml.replace(/\{\{\s*app_name\s*\}\}/g, 'SkyPulse');
 
-// Default API backend URL from environment or standard Render deployment
-const apiBaseUrl = process.env.API_BASE_URL || 'https://skypulse.onrender.com';
+// Default API backend URL from environment, or empty for direct autonomous Open-Meteo operation
+const apiBaseUrl = process.env.API_BASE_URL || '';
 
 // Inject mobile config before closing head tag
 const mobileConfigScript = `
