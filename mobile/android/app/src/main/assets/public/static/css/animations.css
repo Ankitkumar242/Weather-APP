@@ -1,0 +1,139 @@
+/* SkyPulse Ambient Animations */
+
+/* Ambient Background Canvas Layer */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transition: opacity var(--transition-slow);
+}
+
+/* Drifting clouds layer */
+.cloud-drift {
+  position: absolute;
+  width: 250%;
+  height: 100%;
+  top: 0;
+  left: -50%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 25%, rgba(255, 255, 255, 0.07) 0%, transparent 35%);
+  animation: driftClouds 60s linear infinite;
+}
+
+@keyframes driftClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(25%); }
+}
+
+/* Twinkling night stars */
+.night-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #ffffff, transparent),
+    radial-gradient(1.5px 1.5px at 100px 150px, #ffffff, transparent),
+    radial-gradient(1px 1px at 220px 70px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 340px 220px, #ffffff, transparent),
+    radial-gradient(1px 1px at 450px 90px, #ffffff, transparent),
+    radial-gradient(1.5px 1.5px at 580px 280px, #ffffff, transparent);
+  background-repeat: repeat;
+  background-size: 600px 400px;
+  animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+/* Subtle rain streaks */
+.rain-streaks {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 75%, rgba(255,255,255,0.2) 100%);
+  background-size: 2px 20px;
+  animation: rainFall 0.8s linear infinite;
+  opacity: 0.25;
+}
+
+@keyframes rainFall {
+  0% { background-position: 0 0; }
+  100% { background-position: -20px 400px; }
+}
+
+/* Skeleton Loading Shimmer */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.6s infinite ease-in-out;
+  border-radius: var(--radius-md);
+  color: transparent !important;
+}
+
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Pulse badge animation */
+.pulse-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cloud-drift,
+  .night-stars,
+  .rain-streaks {
+    animation: none !important;
+  }
+}

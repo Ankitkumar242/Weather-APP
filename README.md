@@ -113,16 +113,136 @@ make lint
 
 ---
 
-## 🐳 Docker Deployment
+## 🐳 Production Deployment
 
+### 1. Dockerfile
+SkyPulse includes a hardened multi-process production container using Gunicorn process management with async Uvicorn workers and a dedicated non-root user (`appuser`):
 ```bash
-# Build the container image
+# Build the production image
 docker build -t skypulse:latest .
 
-# Run container
-docker run -p 8000:8000 --name skypulse skypulse:latest
+# Run container with custom PORT support
+docker run -e PORT=8000 -e ALLOWED_ORIGINS="https://localhost,capacitor://localhost" -p 8000:8000 --name skypulse skypulse:latest
 ```
-Visit http://localhost:8000 to access the application.
+Container healthiness is monitored automatically via `HEALTHCHECK` hitting `http://localhost:${PORT}/healthz`.
+
+### 2. Render (`render.yaml`)
+A turnkey `render.yaml` configuration is included for deploying to Render's free Web Service tier:
+1. Push your repository to GitHub or GitLab.
+2. Link your repository in Render and create a **Blueprint Instance**.
+3. Render automatically picks up `render.yaml`, configures the Docker runtime, sets `/healthz` as the health check path, and provisions the service.
+
+### 3. Railway Deployment
+1. Install the Railway CLI or use the web dashboard at [railway.app](https://railway.app):
+   ```bash
+   railway login
+   railway init
+   railway up
+   ```
+2. In the Railway dashboard under **Variables**, set:
+   - `PORT=8000`
+   - `APP_ENV=production`
+   - `ALLOWED_ORIGINS=https://localhost,capacitor://localhost,https://<your-railway-domain>.up.railway.app`
+3. Railway automatically detects the production `Dockerfile` and builds the image.
+
+### 4. Fly.io Deployment
+1. Install `flyctl` and launch the app:
+   ```bash
+   fly launch --no-deploy
+   ```
+2. Configure `fly.toml` internal port to `8000`:
+   ```toml
+   [http_service]
+     internal_port = 8000
+     force_https = true
+     auto_stop_machines = true
+     auto_start_machines = true
+   ```
+3. Set environment secrets:
+   ```bash
+   fly secrets set ALLOWED_ORIGINS="https://localhost,capacitor://localhost,https://<app>.fly.dev"
+   ```
+4. Deploy:
+   ```bash
+   fly deploy
+   ```
+
+### 5. Strict CORS Security
+CORS is strictly locked via the `ALLOWED_ORIGINS` environment variable in `app/config.py`. Wildcard (`*`) origins are forbidden. Native mobile apps connect via `capacitor://localhost` and `https://localhost`.
+
+---
+
+## 📱 Progressive Web App (PWA)
+
+SkyPulse is a certified, installable Progressive Web App:
+- **Web App Manifest**: Root-accessible `manifest.webmanifest` defining `name`, `short_name`, `standalone` display mode, `#2563EB` theme color, `#0F172A` background color, standard 192/512px icons, and circular safe-zone maskable icons.
+- **Service Worker (`/sw.js`)**:
+  - Registered at root scope `/` with `Service-Worker-Allowed: /` header.
+  - Pre-caches the application shell (HTML, stylesheets, scripts, local Chart.js, i18n JSONs, icons).
+  - **Stale-While-Revalidate Strategy**: Applied to weather forecasts (`/api/v1/weather`) and state trends (`/api/v1/states/*`). Cached data is displayed instantly while revalidating in the background.
+  - **Offline Resilience**: When internet access is disconnected, previously loaded locations remain fully viewable with an **"⚠️ Offline / Stale"** badge. If navigating while offline without cache, `/offline.html` is served.
+- **Install Prompt Handling**:
+  - Desktop & Android: Catches `beforeinstallprompt` to display an inline **"📲 Install App"** button in the header bar.
+  - iOS Safari: Detects Safari on iPhone/iPad and displays an interactive instruction banner: *"Tap Share (⎋) then 'Add to Home Screen' (⊞)"*.
+
+---
+
+## 🤖 Android Native App (Capacitor)
+
+SkyPulse can be compiled directly into a native Android APK / AAB using Capacitor:
+
+### 1. Architecture
+- The native wrapper lives in `/mobile`.
+- The build script (`node scripts/build-mobile.js`) compiles `app/static` and outputs `mobile/dist/index.html` configured with `API_BASE_URL`.
+- Native Geolocation is orchestrated by `@capacitor/geolocation` in `app/static/js/geolocation.js` (with seamless fallback to `navigator.geolocation` on web).
+
+### 2. Prerequisites
+- **Node.js**: v18.0.0 or higher (`node -v`)
+- **Android Studio**: Ladybug / Hedgehog or newer with Android SDK Platform 34 and Android Build Tools.
+- **Java Development Kit**: JDK 17 or 21 (`JAVA_HOME` set).
+
+### 3. Quick Start & Build
+
+```bash
+# Navigate to mobile directory
+cd mobile
+
+# Install dependencies
+npm install
+
+# 1. Build web distribution & sync with Android native project
+npm run android:sync
+
+# 2. Build Debug APK (outputs to mobile/android/app/build/outputs/apk/debug/app-debug.apk)
+npm run android:build
+```
+
+### 4. Installing on Phone / Emulator
+- **Physical Device**: Connect phone via USB with *USB Debugging* enabled, then run:
+  ```bash
+  adb install android/app/build/outputs/apk/debug/app-debug.apk
+  ```
+- **Android Studio Emulator**: Drag and drop `app-debug.apk` directly into your running Android emulator, or open `/mobile/android` in Android Studio and click **Run (Shift + F10)**.
+
+### 5. Google Play Console Release (Signed AAB)
+To generate a release Android App Bundle (`.aab`) for Google Play Store submission:
+
+1. Create a release signing keystore (if you don't already have one):
+   ```bash
+   keytool -genkey -v -keystore skypulse-release.keystore -alias skypulse -keyalg RSA -keysize 2048 -validity 10000
+   ```
+2. Export signing credentials in your environment (never commit these secrets):
+   ```bash
+   export KEYSTORE_PATH="/path/to/skypulse-release.keystore"
+   export KEYSTORE_PASSWORD="your-keystore-password"
+   export KEYSTORE_ALIAS="skypulse"
+   export KEY_PASSWORD="your-key-password"
+   ```
+3. Run the release build script:
+   ```bash
+   npm run android:release
+   ```
+4. Upload `mobile/android/app/build/outputs/bundle/release/app-release.aab` directly to Google Play Console under **Production** or **Internal testing**.
 
 ---
 

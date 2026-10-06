@@ -1,0 +1,22 @@
+{
+  "appId": "com.skypulse.weather",
+  "appName": "SkyPulse",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "hostname": "localhost",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#0F172A",
+      "showSpinner": false
+    }
+  }
+}

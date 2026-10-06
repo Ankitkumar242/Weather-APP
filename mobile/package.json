@@ -1,0 +1,22 @@
+{
+  "name": "skypulse-mobile",
+  "version": "1.0.0",
+  "description": "SkyPulse Weather Native Mobile App (Capacitor)",
+  "main": "dist/index.html",
+  "scripts": {
+    "build": "node scripts/build-mobile.js",
+    "cap:sync": "cap sync",
+    "android:sync": "node scripts/build-mobile.js && cap sync android",
+    "android:build": "node scripts/build-mobile.js && cap sync android && node scripts/run-gradle.js assembleDebug",
+    "android:release": "node scripts/build-mobile.js && cap sync android && node scripts/run-gradle.js bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/geolocation": "^6.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.1.2"
+  }
+}

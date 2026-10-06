@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: skypulse
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /healthz
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: DEBUG
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        value: https://localhost,capacitor://localhost,http://localhost:8000
+      - key: NOMINATIM_USER_AGENT
+        value: SkyPulseWeatherApp/1.0 (contact: support@skypulse.app)
+      - key: RATE_LIMIT_DEFAULT
+        value: 60/minute

@@ -54,6 +54,17 @@ class Settings(BaseSettings):
     default_latitude: float = Field(default=28.6139)
     default_longitude: float = Field(default=77.2090)
 
+    # Allowed CORS Origins
+    allowed_origins: list[str] | str = Field(
+        default_factory=lambda: [
+            "https://localhost",
+            "capacitor://localhost",
+            "http://localhost",
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+        ]
+    )
+
     # Smart Insights Thresholds
     threshold_heat_temp: float = Field(default=38.0)
     threshold_cold_temp: float = Field(default=8.0)
@@ -61,6 +72,21 @@ class Settings(BaseSettings):
     threshold_poor_aqi: int = Field(default=150)
     threshold_strong_gust: float = Field(default=45.0)
     threshold_heavy_rain: float = Field(default=15.0)
+
+    @field_validator("allowed_origins", mode="before")
+    @classmethod
+    def parse_allowed_origins(cls, v: Any) -> list[str]:
+        if isinstance(v, str):
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        if isinstance(v, list):
+            return [str(o).strip() for o in v if str(o).strip()]
+        return [
+            "https://localhost",
+            "capacitor://localhost",
+            "http://localhost",
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+        ]
 
     @field_validator("debug", mode="before")
     @classmethod
