@@ -5,7 +5,7 @@ and captures screenshots into the artifact directory.
 
 import asyncio
 import os
-import sys
+
 from playwright.async_api import async_playwright
 
 SCREENSHOT_DIR = r"C:\Users\ankit\.gemini\antigravity\brain\d693c550-b3be-4ce7-8880-7ac2606f12c9\screenshots"
@@ -13,8 +13,8 @@ os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
 BASE_URL = "http://127.0.0.1:8000"
 
-async def run_verification():
-    console_errors = []
+async def run_verification() -> None:
+    console_errors: list[str] = []
     
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -82,7 +82,8 @@ async def run_verification():
 
         # Drill down into a city (e.g. first city card in Rajasthan)
         first_city = await page.wait_for_selector(".city-card")
-        await first_city.click()
+        if first_city:
+            await first_city.click()
         await page.wait_for_selector(".hero-temp-big", timeout=8000)
         await asyncio.sleep(1)
         print("Successfully drilled down into city!")
@@ -155,3 +156,4 @@ async def run_verification():
 
 if __name__ == "__main__":
     asyncio.run(run_verification())
+

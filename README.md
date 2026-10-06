@@ -139,3 +139,4 @@ Append `?debug=1` to the URL or click **[Debug Telemetry]** in the footer to ope
 
 - **Open-Meteo**: Weather forecast, historical analysis, and air quality data are provided by [Open-Meteo.com](https://open-meteo.com/). Open-Meteo's free tier is strictly for **non-commercial use** under their API terms. Any commercial use requires purchasing an official Open-Meteo commercial subscription plan.
 - **OpenStreetMap**: Reverse geocoding data is provided by © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright) via the Nominatim API in accordance with the Nominatim Usage Policy.
+

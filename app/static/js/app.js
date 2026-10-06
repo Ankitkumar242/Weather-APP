@@ -7,7 +7,7 @@ import { UI_ICONS } from "../icons/weather-icons.js";
 import { api } from "./api.js";
 import { render15DayChart, renderHourlyChart, renderStateTrendChart } from "./charts.js";
 import { getFallbackLocation, requestBrowserLocation } from "./geolocation.js";
-import { initI18n, t } from "./i18n.js";
+import { getLanguage, initI18n, setLanguage, t } from "./i18n.js";
 import { store } from "./state.js";
 import { ui } from "./ui.js";
 import { UNITS } from "./units.js";
@@ -23,6 +23,7 @@ class App {
 
   async init() {
     await initI18n();
+    document.documentElement.lang = getLanguage();
     this.applyTheme(store.get("theme"));
 
     // Check debug mode
@@ -117,6 +118,9 @@ class App {
 
           <!-- Header Actions -->
           <div class="header-actions">
+            <button class="btn-lang-toggle" id="btn-toggle-lang" title="Switch Language / भाषा बदलें" aria-label="Toggle language">
+              ${getLanguage() === "hi" ? "🇮🇳 हिन्दी" : "🇬🇧 English"}
+            </button>
             <span id="time-ago-badge" style="font-size:var(--font-xs);color:var(--text-muted);display:none;"></span>
             <button class="btn-icon" id="btn-manual-refresh" title="Refresh weather" aria-label="Refresh">
               ${UI_ICONS.refresh}
@@ -199,9 +203,18 @@ class App {
               </div>
             </div>
 
+            <!-- Language Switcher -->
+            <div>
+              <label style="font-size:var(--font-sm);font-weight:bold;display:block;margin-bottom:6px;">${t("language")}</label>
+              <div class="segmented-control" id="settings-lang">
+                <button class="segmented-btn" data-lang="en">🇬🇧 English</button>
+                <button class="segmented-btn" data-lang="hi">🇮🇳 हिन्दी</button>
+              </div>
+            </div>
+
             <!-- Theme Switcher -->
             <div>
-              <label style="font-size:var(--font-sm);font-weight:bold;display:block;margin-bottom:6px;">Appearance</label>
+              <label style="font-size:var(--font-sm);font-weight:bold;display:block;margin-bottom:6px;">${t("theme")}</label>
               <div class="segmented-control" id="settings-theme">
                 <button class="segmented-btn" data-theme="auto">${t("auto")}</button>
                 <button class="segmented-btn" data-theme="light">${t("light")}</button>
@@ -531,6 +544,13 @@ class App {
       }
     });
 
+    // Top-bar Language toggle button
+    document.getElementById("btn-toggle-lang")?.addEventListener("click", () => {
+      const current = getLanguage();
+      const next = current === "en" ? "hi" : "en";
+      this.switchLanguage(next);
+    });
+
     // Settings Modal
     const modal = document.getElementById("settings-modal");
     document.getElementById("btn-open-settings")?.addEventListener("click", () => {
@@ -542,6 +562,14 @@ class App {
     });
     modal?.addEventListener("click", (e) => {
       if (e.target === modal) modal.classList.remove("active");
+    });
+
+    // Settings Segmented Buttons: Language
+    document.getElementById("settings-lang")?.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-lang]");
+      if (btn) {
+        this.switchLanguage(btn.dataset.lang);
+      }
     });
 
     // Settings Segmented Buttons: Units
@@ -598,6 +626,44 @@ class App {
         this.checkIfNeedsRefresh();
       }
     });
+  }
+
+  switchLanguage(newLang) {
+    setLanguage(newLang);
+
+    // Update top-bar language button label
+    const langBtn = document.getElementById("btn-toggle-lang");
+    if (langBtn) {
+      langBtn.textContent = newLang === "hi" ? "🇮🇳 हिन्दी" : "🇬🇧 English";
+    }
+
+    // Update desktop tabs
+    document.querySelectorAll('.desktop-tab-btn[data-tab="today"]').forEach((b) => (b.textContent = t("tabToday")));
+    document.querySelectorAll('.desktop-tab-btn[data-tab="timeline"]').forEach((b) => (b.textContent = t("tab15Days")));
+    document.querySelectorAll('.desktop-tab-btn[data-tab="states"]').forEach((b) => (b.textContent = t("tabStates")));
+
+    // Update mobile bottom nav tabs
+    const bToday = document.querySelector('.bottom-nav [data-tab="today"] span');
+    if (bToday) bToday.textContent = t("tabToday");
+    const bTimeline = document.querySelector('.bottom-nav [data-tab="timeline"] span');
+    if (bTimeline) bTimeline.textContent = t("tab15Days");
+    const bStates = document.querySelector('.bottom-nav [data-tab="states"] span');
+    if (bStates) bStates.textContent = t("tabStates");
+
+    // Update search input placeholder
+    const searchInput = document.getElementById("search-input");
+    if (searchInput) {
+      searchInput.placeholder = t("searchPlaceholder");
+    }
+
+    // Update time-ago badge
+    this.updateTimeAgoBadge();
+
+    // Re-render active views
+    this.onStateChange(store.state);
+
+    // Re-render settings modal state
+    this.populateSettingsModal();
   }
 
   renderSearchResults(results) {
@@ -698,6 +764,12 @@ class App {
   populateSettingsModal() {
     const units = store.get("units");
     const theme = store.get("theme");
+    const lang = getLanguage();
+
+    // Highlight active language button
+    document.querySelectorAll("#settings-lang .segmented-btn").forEach((b) => {
+      b.classList.toggle("active", b.dataset.lang === lang);
+    });
 
     // Highlight active unit buttons
     document.querySelectorAll("#settings-unit-temp .segmented-btn").forEach((b) => {
@@ -838,3 +910,4 @@ document.addEventListener("DOMContentLoaded", () => {
   const app = new App();
   app.init();
 });
+

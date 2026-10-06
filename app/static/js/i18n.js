@@ -1,5 +1,6 @@
 /**
  * SkyPulse i18n Translation Engine
+ * Supports real-time English and Hindi switching.
  */
 
 import { store } from "./state.js";
@@ -30,4 +31,22 @@ export function t(key, params = {}) {
     text = text.replace(`{${k}}`, v);
   }
   return text;
+}
+
+export function tCondition(conditionLabel) {
+  if (!conditionLabel) return "–";
+  const lang = store.get("lang") || "en";
+  if (lang === "en") return conditionLabel;
+
+  const translated = translations.hi?.conditions?.[conditionLabel];
+  return translated || conditionLabel;
+}
+
+export function getLanguage() {
+  return store.get("lang") || "en";
+}
+
+export function setLanguage(lang) {
+  store.set({ lang });
+  document.documentElement.lang = lang;
 }

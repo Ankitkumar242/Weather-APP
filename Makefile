@@ -22,3 +22,4 @@ format:
 	ruff format app tests
 
 check: lint test
+

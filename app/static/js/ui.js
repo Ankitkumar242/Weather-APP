@@ -1,11 +1,12 @@
 /**
  * SkyPulse UI Renderer
  * Renders glassmorphic cards, hero, tiles, 15-day timeline, state dashboard, and modals.
+ * Supports multi-language translation (English & Hindi).
  */
 
 import { UI_ICONS, getWeatherIconSvg } from "../icons/weather-icons.js";
 import { render15DayChart, renderHourlyChart, renderStateTrendChart } from "./charts.js";
-import { t } from "./i18n.js";
+import { t, tCondition } from "./i18n.js";
 import { store } from "./state.js";
 import {
   formatDistance,
@@ -30,7 +31,7 @@ export class UIRenderer {
       bg = "fog";
     } else if ((weatherCode >= 51 && weatherCode <= 67) || (weatherCode >= 80 && weatherCode <= 82)) {
       bg = isDay ? "rain-day" : "rain-night";
-    } else if (weatherCode >= 71 && weatherCode <= 77 || weatherCode === 85 || weatherCode === 86) {
+    } else if ((weatherCode >= 71 && weatherCode <= 77) || weatherCode === 85 || weatherCode === 86) {
       bg = "snow";
     } else if (weatherCode >= 95) {
       bg = "thunderstorm";
@@ -82,13 +83,14 @@ export class UIRenderer {
     const localTimeStr = current.time ? current.time.replace("T", " ") : "";
     const sunriseStr = current.sunrise ? current.sunrise.split("T")[1] : "–";
     const sunsetStr = current.sunset ? current.sunset.split("T")[1] : "–";
+    const conditionTranslated = tCondition(current.condition_label);
 
     return `
       <section class="glass-card hero-card" aria-label="Current conditions">
         <div class="hero-header">
           <div>
             <h1 class="hero-location-title">${location.name}${location.state ? `, ${location.state}` : ""}</h1>
-            <p class="hero-location-sub">Local Time: ${localTimeStr} • ${location.country}</p>
+            <p class="hero-location-sub">${t("localTime")}: ${localTimeStr} • ${location.country}</p>
           </div>
           <button class="btn-icon" id="btn-toggle-favorite" title="Favorite location" aria-label="Toggle favorite">
             ${isFav ? UI_ICONS.starFilled : UI_ICONS.star}
@@ -105,7 +107,7 @@ export class UIRenderer {
             <div class="hero-condition-icon">
               ${getWeatherIconSvg(current.weather_code, current.is_day, 72)}
             </div>
-            <span class="hero-condition-label">${current.condition_label}</span>
+            <span class="hero-condition-label">${conditionTranslated}</span>
             <span class="hero-feels-like">${t("feelsLike")} ${formatTemp(current.apparent_temperature, units.temp)}</span>
           </div>
         </div>
@@ -148,15 +150,15 @@ export class UIRenderer {
     return `
       <section class="glass-card insights-card" aria-label="Weather Insights">
         <div class="insights-header">
-          <h2 style="font-size:var(--font-base);font-weight:var(--fw-bold);">Smart Weather Advisory</h2>
-          <span class="insights-tag">Auto-generated, not official warnings</span>
+          <h2 style="font-size:var(--font-base);font-weight:var(--fw-bold);">${t("advisoryTitle")}</h2>
+          <span class="insights-tag">${t("advisoryTag")}</span>
         </div>
         ${alertsHtml}
         ${
           insights.tip
             ? `
           <div class="insights-tip">
-            <span>💡 <strong>Tip:</strong> ${insights.tip}</span>
+            <span>💡 <strong>${t("tipPrefix")}</strong> ${insights.tip}</span>
           </div>`
             : ""
         }
@@ -197,7 +199,7 @@ export class UIRenderer {
             <span class="tile-icon">${UI_ICONS.droplet}</span>
           </div>
           <div class="tile-value">${Math.round(current.relative_humidity)}%</div>
-          <div class="tile-sub">Dew point: ${formatTemp(current.dew_point, units.temp)}</div>
+          <div class="tile-sub">${t("dewPointSub")}: ${formatTemp(current.dew_point, units.temp)}</div>
         </div>
 
         <!-- Wind -->
@@ -209,7 +211,7 @@ export class UIRenderer {
           <div class="tile-value">${formatWind(current.wind_speed, units.wind)}</div>
           <div class="tile-sub">
             <span style="display:inline-block;transform:rotate(${current.wind_direction}deg);">↑</span>
-            Gusts: ${formatWind(current.wind_gusts || current.wind_speed, units.wind)}
+            ${t("gustsSub")}: ${formatWind(current.wind_gusts || current.wind_speed, units.wind)}
           </div>
         </div>
 
@@ -240,7 +242,7 @@ export class UIRenderer {
             <span class="tile-icon">${UI_ICONS.droplet}</span>
           </div>
           <div class="tile-value">${formatPrecip(current.precipitation, units.precip)}</div>
-          <div class="tile-sub">Cloud cover: ${Math.round(current.cloud_cover)}%</div>
+          <div class="tile-sub">${t("cloudCover")}: ${Math.round(current.cloud_cover)}%</div>
         </div>
 
         <!-- Pressure -->
@@ -250,7 +252,7 @@ export class UIRenderer {
             <span class="tile-icon">${UI_ICONS.gauge}</span>
           </div>
           <div class="tile-value">${formatPressure(current.pressure, units.pressure)}</div>
-          <div class="tile-sub">MSL Barometric</div>
+          <div class="tile-sub">${t("mslPressure")}</div>
         </div>
 
         <!-- Visibility -->
@@ -260,7 +262,7 @@ export class UIRenderer {
             <span class="tile-icon">${UI_ICONS.eye}</span>
           </div>
           <div class="tile-value">${formatDistance(current.visibility)}</div>
-          <div class="tile-sub">${current.visibility && current.visibility > 9000 ? "Clear horizon" : "Hazy"}</div>
+          <div class="tile-sub">${current.visibility && current.visibility > 9000 ? t("clearHorizon") : t("hazy")}</div>
         </div>
 
         <!-- Cloud Cover -->
@@ -270,7 +272,7 @@ export class UIRenderer {
             <span class="tile-icon">${UI_ICONS.sunRays}</span>
           </div>
           <div class="tile-value">${Math.round(current.cloud_cover)}%</div>
-          <div class="tile-sub">${current.cloud_cover < 20 ? "Clear skies" : current.cloud_cover < 70 ? "Partly cloudy" : "Overcast"}</div>
+          <div class="tile-sub">${current.cloud_cover < 20 ? "Clear" : current.cloud_cover < 70 ? "Partly cloudy" : "Overcast"}</div>
         </div>
       </div>
     `;
@@ -297,8 +299,8 @@ export class UIRenderer {
     return `
       <section class="glass-card" style="margin-bottom:var(--space-6);" aria-label="Hourly 48-Hour Forecast">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-3);">
-          <h2 style="font-size:var(--font-lg);font-weight:var(--fw-bold);">Hourly Forecast (Next 48 Hours)</h2>
-          <span style="font-size:var(--font-xs);color:var(--text-muted);">Temperature & Rain Probability</span>
+          <h2 style="font-size:var(--font-lg);font-weight:var(--fw-bold);">${t("hourlyTitle")}</h2>
+          <span style="font-size:var(--font-xs);color:var(--text-muted);">${t("hourlySub")}</span>
         </div>
 
         <div class="chart-container" style="height:220px;">
@@ -335,7 +337,6 @@ export class UIRenderer {
     const nextRainyDays = next7.filter((d) => (d.precipitation_probability_max || 0) > 40 || (d.precipitation_sum || 0) > 1.0).length;
     const nextPeakTemp = next7.length ? Math.max(...next7.map((d) => d.temp_max)).toFixed(1) : "–";
 
-    // Find best outdoor day (temp 20-30, rain chance < 20%)
     let bestDay = "–";
     const candidates = next7.filter((d) => d.temp_max >= 20 && d.temp_max <= 32 && (d.precipitation_probability_max || 0) < 25);
     if (candidates.length) {
@@ -350,10 +351,11 @@ export class UIRenderer {
         const parts = d.date.split("-");
         const formattedDate = `${parts[2]}/${parts[1]}`;
         const dayClass = d.kind === "today" ? "today" : "";
+        const labelText = d.kind === "past" ? t("past") : d.kind === "today" ? t("today") : t("forecast");
 
         return `
         <div class="glass-card day-card ${dayClass}" role="button" tabindex="0" aria-label="${d.date} ${d.kind} weather">
-          <span class="day-card-label ${d.kind}">${d.kind}</span>
+          <span class="day-card-label ${d.kind}">${labelText}</span>
           <span class="day-card-date">${formattedDate}</span>
           <div class="day-card-icon">
             ${getWeatherIconSvg(d.weather_code, 1, 40)}
@@ -371,13 +373,16 @@ export class UIRenderer {
 
     // Table view HTML
     const tableRows = filtered
-      .map((d) => `
+      .map((d) => {
+        const labelText = d.kind === "past" ? t("past") : d.kind === "today" ? t("today") : t("forecast");
+        const condTranslated = tCondition(d.condition_label);
+        return `
         <tr>
-          <td><span class="day-card-label ${d.kind}">${d.kind}</span></td>
+          <td><span class="day-card-label ${d.kind}">${labelText}</span></td>
           <td><strong>${d.date}</strong></td>
           <td style="display:flex;align-items:center;gap:6px;">
             ${getWeatherIconSvg(d.weather_code, 1, 24)}
-            ${d.condition_label}
+            ${condTranslated}
           </td>
           <td><strong style="color:var(--temp-hot);">${formatTemp(d.temp_max, units.temp)}</strong></td>
           <td><span style="color:var(--temp-cold);">${formatTemp(d.temp_min, units.temp)}</span></td>
@@ -385,7 +390,8 @@ export class UIRenderer {
           <td>${d.precipitation_probability_max !== null ? `${d.precipitation_probability_max}%` : "–"}</td>
           <td>${formatWind(d.wind_speed_max, units.wind)}</td>
         </tr>
-      `)
+      `;
+      })
       .join("");
 
     return `
@@ -393,24 +399,22 @@ export class UIRenderer {
         <div class="glass-card">
           <div class="timeline-header">
             <div>
-              <h2 style="font-size:var(--font-xl);font-weight:var(--fw-bold);">15-Day Weather Timeline</h2>
-              <p style="font-size:var(--font-xs);color:var(--text-muted);">
-                Previous 7 Days Model Analysis + Today + Next 7 Days Forecast
-              </p>
+              <h2 style="font-size:var(--font-xl);font-weight:var(--fw-bold);">${t("timelineTitle")}</h2>
+              <p style="font-size:var(--font-xs);color:var(--text-muted);">${t("timelineSub")}</p>
             </div>
 
             <!-- Segmented Control -->
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
               <div class="segmented-control" role="tablist">
-                <button class="segmented-btn ${activeSegment === "past" ? "active" : ""}" data-segment="past">Past 7</button>
-                <button class="segmented-btn ${activeSegment === "all" ? "active" : ""}" data-segment="all">All 15</button>
-                <button class="segmented-btn ${activeSegment === "forecast" ? "active" : ""}" data-segment="forecast">Next 7</button>
+                <button class="segmented-btn ${activeSegment === "past" ? "active" : ""}" data-segment="past">${t("past7Days")}</button>
+                <button class="segmented-btn ${activeSegment === "all" ? "active" : ""}" data-segment="all">${t("all15Days")}</button>
+                <button class="segmented-btn ${activeSegment === "forecast" ? "active" : ""}" data-segment="forecast">${t("next7Days")}</button>
               </div>
 
               <!-- View toggle -->
               <div class="segmented-control">
-                <button class="segmented-btn ${activeView === "cards" ? "active" : ""}" data-view="cards">Cards</button>
-                <button class="segmented-btn ${activeView === "table" ? "active" : ""}" data-view="table">Table</button>
+                <button class="segmented-btn ${activeView === "cards" ? "active" : ""}" data-view="cards">${t("cards")}</button>
+                <button class="segmented-btn ${activeView === "table" ? "active" : ""}" data-view="table">${t("table")}</button>
               </div>
             </div>
           </div>
@@ -429,14 +433,14 @@ export class UIRenderer {
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Period</th>
-                      <th>Date</th>
-                      <th>Condition</th>
-                      <th>Max</th>
-                      <th>Min</th>
-                      <th>Rain</th>
-                      <th>Rain Chance</th>
-                      <th>Max Wind</th>
+                      <th>${t("period")}</th>
+                      <th>${t("date")}</th>
+                      <th>${t("condition")}</th>
+                      <th>${t("max")}</th>
+                      <th>${t("min")}</th>
+                      <th>${t("rain")}</th>
+                      <th>${t("rainChance")}</th>
+                      <th>${t("maxWind")}</th>
                     </tr>
                   </thead>
                   <tbody>${tableRows}</tbody>
@@ -448,29 +452,29 @@ export class UIRenderer {
           <div class="summary-stats-grid">
             <div class="stat-box">
               <div style="font-size:var(--font-xs);color:var(--text-muted);font-weight:bold;text-transform:uppercase;">
-                Past 7 Days Summary
+                ${t("past7Summary")}
               </div>
               <div style="margin-top:6px;font-size:var(--font-sm);">
-                <div>Avg High: <strong>${pastAvgMax}°C</strong></div>
-                <div>Total Rain: <strong>${pastTotalRain} mm</strong></div>
-                <div>Hottest / Coldest: <strong>${pastHottest}°C / ${pastColdest}°C</strong></div>
+                <div>${t("avgHigh")}: <strong>${pastAvgMax}°C</strong></div>
+                <div>${t("totalRain")}: <strong>${pastTotalRain} mm</strong></div>
+                <div>${t("hottest")} / ${t("coldest")}: <strong>${pastHottest}°C / ${pastColdest}°C</strong></div>
               </div>
             </div>
 
             <div class="stat-box">
               <div style="font-size:var(--font-xs);color:var(--text-muted);font-weight:bold;text-transform:uppercase;">
-                Next 7 Days Forecast Highlights
+                ${t("next7Summary")}
               </div>
               <div style="margin-top:6px;font-size:var(--font-sm);">
-                <div>Rainy Days Expected: <strong>${nextRainyDays}</strong></div>
-                <div>Peak Forecast High: <strong>${nextPeakTemp}°C</strong></div>
-                <div>Best Day Outdoors: <strong>${bestDay}</strong></div>
+                <div>${t("rainyDays")}: <strong>${nextRainyDays}</strong></div>
+                <div>${t("peakHigh")}: <strong>${nextPeakTemp}°C</strong></div>
+                <div>${t("bestOutdoors")}: <strong>${bestDay}</strong></div>
               </div>
             </div>
           </div>
 
           <p style="font-size:11px;color:var(--text-muted);margin-top:12px;font-style:italic;">
-            * Footnote: Past daily values are Open-Meteo best-match numerical model reanalysis, not direct weather station readings.
+            ${t("footnote")}
           </p>
         </div>
       </section>
@@ -505,7 +509,7 @@ export class UIRenderer {
         <div class="glass-card city-card" data-lat="${c.lat}" data-lon="${c.lon}" data-name="${c.name}" role="button" tabindex="0">
           <div class="city-card-header">
             <span class="city-card-title">${c.name}</span>
-            ${c.is_capital ? `<span class="capital-badge">Capital</span>` : ""}
+            ${c.is_capital ? `<span class="capital-badge">${t("capitalBadge")}</span>` : ""}
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0;">
             <div style="font-size:var(--font-3xl);font-weight:bold;">
@@ -514,11 +518,11 @@ export class UIRenderer {
             <div>${getWeatherIconSvg(c.weather_code, 1, 40)}</div>
           </div>
           <div style="font-size:var(--font-xs);color:var(--text-secondary);display:flex;justify-content:space-between;">
-            <span>${c.condition_label}</span>
+            <span>${tCondition(c.condition_label)}</span>
             <span>H: ${formatTemp(c.temp_max, units.temp, false)}° • L: ${formatTemp(c.temp_min, units.temp, false)}°</span>
           </div>
           <div style="font-size:11px;color:#0284C7;margin-top:4px;">
-            Rain chance: ${c.precipitation_probability !== null ? `${c.precipitation_probability}%` : "–"}
+            ${t("rainChance")}: ${c.precipitation_probability !== null ? `${c.precipitation_probability}%` : "–"}
           </div>
         </div>`
         )
@@ -531,21 +535,21 @@ export class UIRenderer {
       countryHighlightsHtml = `
         <div class="summary-stats-grid" style="margin-bottom:16px;">
           <div class="stat-box" style="border-left:4px solid var(--temp-hot);">
-            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">🔥 HOTTEST CAPITAL RIGHT NOW</div>
+            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">${t("hottestCapital")}</div>
             <div style="font-size:var(--font-lg);font-weight:bold;margin-top:2px;">
               ${countryOverview.hottest?.name || "–"}: ${formatTemp(countryOverview.hottest?.current_temp, units.temp)}
             </div>
           </div>
           <div class="stat-box" style="border-left:4px solid var(--temp-cold);">
-            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">❄️ COLDEST CAPITAL RIGHT NOW</div>
+            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">${t("coldestCapital")}</div>
             <div style="font-size:var(--font-lg);font-weight:bold;margin-top:2px;">
               ${countryOverview.coldest?.name || "–"}: ${formatTemp(countryOverview.coldest?.current_temp, units.temp)}
             </div>
           </div>
           <div class="stat-box" style="border-left:4px solid var(--accent-primary);">
-            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">🌧️ RAINIEST CAPITAL</div>
+            <div style="font-size:11px;color:var(--text-muted);font-weight:bold;">${t("rainiestCapital")}</div>
             <div style="font-size:var(--font-lg);font-weight:bold;margin-top:2px;">
-              ${countryOverview.wettest?.name || "–"}: ${countryOverview.wettest?.precipitation_probability || 0}% rain chance
+              ${countryOverview.wettest?.name || "–"}: ${countryOverview.wettest?.precipitation_probability || 0}% ${t("rainChance")}
             </div>
           </div>
         </div>
@@ -557,26 +561,26 @@ export class UIRenderer {
         <div class="glass-card" style="margin-bottom:var(--space-4);">
           <div class="state-controls">
             <div>
-              <h2 style="font-size:var(--font-xl);font-weight:var(--fw-bold);">State & Regional Dashboard</h2>
-              <p style="font-size:var(--font-xs);color:var(--text-muted);">Explore weather across all Indian States and Union Territories</p>
+              <h2 style="font-size:var(--font-xl);font-weight:var(--fw-bold);">${t("stateTitle")}</h2>
+              <p style="font-size:var(--font-xs);color:var(--text-muted);">${t("stateSub")}</p>
             </div>
 
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
               <select id="select-state" class="select-control" aria-label="Select state">
-                <option value="">-- Choose State / UT --</option>
+                <option value="">${t("chooseState")}</option>
                 ${stateOptions}
               </select>
 
               <select id="select-city-sort" class="select-control" aria-label="Sort cities">
-                <option value="capital" ${sortOrder === "capital" ? "selected" : ""}>Capital First</option>
-                <option value="hottest" ${sortOrder === "hottest" ? "selected" : ""}>Hottest</option>
-                <option value="coldest" ${sortOrder === "coldest" ? "selected" : ""}>Coldest</option>
-                <option value="rainiest" ${sortOrder === "rainiest" ? "selected" : ""}>Rainiest</option>
-                <option value="az" ${sortOrder === "az" ? "selected" : ""}>A – Z</option>
+                <option value="capital" ${sortOrder === "capital" ? "selected" : ""}>${t("capitalFirst")}</option>
+                <option value="hottest" ${sortOrder === "hottest" ? "selected" : ""}>${t("hottest")}</option>
+                <option value="coldest" ${sortOrder === "coldest" ? "selected" : ""}>${t("coldest")}</option>
+                <option value="rainiest" ${sortOrder === "rainiest" ? "selected" : ""}>${t("rainiest")}</option>
+                <option value="az" ${sortOrder === "az" ? "selected" : ""}>${t("az")}</option>
               </select>
 
               <button class="btn-secondary" id="btn-show-all-india" style="padding:6px 14px;font-size:var(--font-xs);">
-                All-India Capitals Table
+                ${t("allIndiaBtn")}
               </button>
             </div>
           </div>
@@ -585,7 +589,7 @@ export class UIRenderer {
 
           <!-- City cards loaded in one batched call -->
           <div class="city-cards-grid" id="state-cities-grid">
-            ${citiesCardsHtml || `<div style="padding:24px;color:var(--text-muted);text-align:center;">Select a state above to view its cities</div>`}
+            ${citiesCardsHtml || `<div style="padding:24px;color:var(--text-muted);text-align:center;">${t("selectStatePrompt")}</div>`}
           </div>
 
           <!-- State trend chart -->
@@ -594,7 +598,7 @@ export class UIRenderer {
               ? `
             <div style="margin-top:24px;border-top:1px solid var(--glass-border);padding-top:16px;">
               <h3 style="font-size:var(--font-base);font-weight:bold;margin-bottom:8px;">
-                ${stateOverview.state.name} 15-Day Averaged Trend (Averaged across listed cities)
+                ${stateOverview.state.name} ${t("stateTrendTitle")}
               </h3>
               <div class="chart-container" style="height:220px;">
                 <canvas id="chart-state-trend"></canvas>
