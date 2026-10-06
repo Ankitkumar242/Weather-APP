@@ -404,7 +404,7 @@ export class UIRenderer {
             </div>
 
             <!-- Segmented Control -->
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <div class="timeline-actions">
               <div class="segmented-control" role="tablist">
                 <button class="segmented-btn ${activeSegment === "past" ? "active" : ""}" data-segment="past">${t("past7Days")}</button>
                 <button class="segmented-btn ${activeSegment === "all" ? "active" : ""}" data-segment="all">${t("all15Days")}</button>
@@ -565,7 +565,7 @@ export class UIRenderer {
               <p style="font-size:var(--font-xs);color:var(--text-muted);">${t("stateSub")}</p>
             </div>
 
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <div class="state-controls-actions">
               <select id="select-state" class="select-control" aria-label="Select state">
                 <option value="">${t("chooseState")}</option>
                 ${stateOptions}

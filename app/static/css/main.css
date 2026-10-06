@@ -46,6 +46,10 @@ body {
   position: relative;
   z-index: 1;
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
@@ -827,33 +831,47 @@ body {
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-bottom: var(--space-4);
+  width: 100%;
 }
 
-@media (max-width: 767px) {
+.timeline-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+@media (max-width: 860px) {
   .timeline-header {
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-3);
   }
 
-  .timeline-header > div:last-child {
+  .timeline-actions {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: var(--space-2);
     width: 100%;
   }
 
-  .segmented-control {
+  .timeline-actions .segmented-control {
     width: 100%;
     display: flex;
   }
 
-  .segmented-btn {
+  .timeline-actions .segmented-btn {
     flex: 1;
     text-align: center;
     padding: var(--space-1) var(--space-2);
     font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+}
 
   .chart-container {
     height: 220px;
@@ -987,6 +1005,7 @@ body {
 /* State Dashboard Section */
 .state-section {
   margin-bottom: var(--space-6);
+  width: 100%;
 }
 
 .state-controls {
@@ -996,28 +1015,37 @@ body {
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-bottom: var(--space-4);
+  width: 100%;
 }
 
-@media (max-width: 767px) {
+.state-controls-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+@media (max-width: 860px) {
   .state-controls {
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-3);
   }
 
-  .state-controls > div:last-child {
+  .state-controls-actions {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: var(--space-2);
     width: 100%;
   }
 
-  .select-control {
-    width: 100%;
-  }
-
-  #btn-show-all-india {
-    width: 100%;
+  .state-controls-actions .select-control,
+  .state-controls-actions #btn-show-all-india {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
     text-align: center;
     justify-content: center;
   }
@@ -1027,15 +1055,32 @@ body {
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
-  padding: var(--space-2) var(--space-4);
+  padding: 8px 36px 8px 16px;
   font-size: var(--font-sm);
   color: var(--text-primary);
   outline: none;
   cursor: pointer;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  transition: all var(--transition-fast);
 }
 
 [data-theme="dark"] .select-control {
-  background: rgba(15, 23, 42, 0.6);
+  background-color: rgba(15, 23, 42, 0.7);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
 .city-cards-grid {
@@ -1088,16 +1133,23 @@ body {
   font-weight: var(--fw-semibold);
 }
 
-/* All-India Table */
+/* All-India & Timeline Tables */
 .data-table-wrapper {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: var(--space-4);
+  max-width: 100%;
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
 }
 
 .data-table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
   font-size: var(--font-sm);
+  white-space: nowrap;
 }
 
 .data-table th, .data-table td {
