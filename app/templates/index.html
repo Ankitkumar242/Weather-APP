@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SkyPulse - Precision, world-class weather intelligence with 15-day timeline and state dashboards.">
+  <meta name="theme-color" content="#2563EB">
+  <link rel="manifest" href="/static/manifest.json">
+
+  <title>{{ app_name }} - World-Class Weather</title>
+
+  <!-- Hand-written CSS Design Tokens & Stylesheets -->
+  <link rel="stylesheet" href="/static/css/tokens.css">
+  <link rel="stylesheet" href="/static/css/animations.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+
+  <!-- Vendored Local Chart.js (Zero runtime CDN) -->
+  <script src="/static/vendor/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="app" aria-live="polite">
+    <!-- Initial Skeleton Loader -->
+    <div style="max-width:1200px;margin:2rem auto;padding:1rem;display:flex;flex-direction:column;gap:1.5rem;">
+      <div class="skeleton" style="height:54px;border-radius:999px;"></div>
+      <div class="skeleton" style="height:260px;border-radius:1.5rem;"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+        <div class="skeleton" style="height:120px;border-radius:1rem;"></div>
+        <div class="skeleton" style="height:120px;border-radius:1rem;"></div>
+        <div class="skeleton" style="height:120px;border-radius:1rem;"></div>
+        <div class="skeleton" style="height:120px;border-radius:1rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;text-align:center;font-family:sans-serif;">
+      <h2>JavaScript Required</h2>
+      <p>SkyPulse requires JavaScript enabled to calculate weather models and interactive charts.</p>
+    </div>
+  </noscript>
+
+  <!-- ES Modules Application Bootstrap -->
+  <script type="module" src="/static/js/app.js"></script>
+
+  <!-- Service Worker Registration for PWA Shell -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
