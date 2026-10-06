@@ -289,6 +289,25 @@ class App {
       }
     }
 
+    // Check if running natively in Capacitor Android/iOS
+    const isNative = Boolean(
+      typeof window !== "undefined" &&
+        window.Capacitor &&
+        (window.Capacitor.isNativePlatform?.() || window.Capacitor.isNative)
+    );
+
+    if (isNative) {
+      try {
+        const loc = await requestBrowserLocation();
+        if (loc && !isNaN(loc.lat) && !isNaN(loc.lon)) {
+          await this.loadWeatherForCoords(loc.lat, loc.lon, loc.name, loc.state, false, "native-gps");
+          return;
+        }
+      } catch (err) {
+        console.warn("Initial native GPS check note:", err);
+      }
+    }
+
     // Default flow: Start with IP fallback or default city immediately so user sees zero delay
     const initialLocation = await getFallbackLocation();
     await this.loadWeatherForCoords(
@@ -553,6 +572,40 @@ class App {
       }, 300);
     });
 
+    const triggerSearchSubmit = async () => {
+      const val = searchInput?.value.trim();
+      if (!val || val.length < 2) return;
+      document.getElementById("search-spinner").style.display = "inline";
+      try {
+        const results = await api.search(val);
+        if (results && results.length > 0) {
+          const top = results[0];
+          const lat = parseFloat(top.latitude ?? top.lat);
+          const lon = parseFloat(top.longitude ?? top.lon);
+          dropdown?.classList.remove("active");
+          searchInput.value = top.name;
+          await this.loadWeatherForCoords(lat, lon, top.name, top.admin1 || top.state || null, false, "search");
+        } else {
+          this.renderSearchResults([]);
+        }
+      } catch (err) {
+        console.error("Search submit error:", err);
+      } finally {
+        document.getElementById("search-spinner").style.display = "none";
+      }
+    };
+
+    searchInput?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        triggerSearchSubmit();
+      }
+    });
+
+    document.querySelector(".search-icon")?.addEventListener("click", () => {
+      triggerSearchSubmit();
+    });
+
     // Close dropdown on click outside
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".search-wrapper")) {
@@ -708,16 +761,19 @@ class App {
     }
 
     dropdown.innerHTML = results
-      .map(
-        (r) => `
-      <div class="search-item" data-lat="${r.latitude}" data-lon="${r.longitude}" data-name="${r.name}" data-state="${r.admin1 || ""}">
+      .map((r) => {
+        const lat = r.latitude ?? r.lat;
+        const lon = r.longitude ?? r.lon;
+        const stateName = r.admin1 || r.state || "";
+        return `
+      <div class="search-item" data-lat="${lat}" data-lon="${lon}" data-name="${r.name}" data-state="${stateName}">
         <div>
           <div class="search-item-title">${r.name}</div>
-          <div class="search-item-sub">${r.admin1 ? `${r.admin1}, ` : ""}${r.country}</div>
+          <div class="search-item-sub">${stateName ? `${stateName}, ` : ""}${r.country || "India"}</div>
         </div>
         <span style="font-size:11px;color:var(--text-muted);">${r.population ? `${(r.population / 1000).toFixed(0)}k pop` : ""}</span>
-      </div>`
-      )
+      </div>`;
+      })
       .join("");
 
     dropdown.classList.add("active");
@@ -728,6 +784,11 @@ class App {
         const lon = parseFloat(item.dataset.lon);
         const name = item.dataset.name;
         const state = item.dataset.state || null;
+
+        if (isNaN(lat) || isNaN(lon)) {
+          console.error("Invalid coordinates for place:", name);
+          return;
+        }
 
         dropdown.classList.remove("active");
         document.getElementById("search-input").value = name;

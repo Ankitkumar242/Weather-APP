@@ -1,6 +1,6 @@
 /**
  * SkyPulse Geolocation Orchestrator
- * Coordinates browser navigator.geolocation, IP fallback, and default location flows.
+ * Coordinates browser navigator.geolocation, native Capacitor GPS, IP fallback, and default location flows.
  */
 
 import { api } from "./api.js";
@@ -11,7 +11,7 @@ const DEFAULT_FALLBACK = {
   state: "Delhi",
   country: "India",
   lat: 28.6139,
-  lon: 77.2090,
+  lon: 77.209,
   isApproximate: false,
   source: "default",
 };
@@ -21,34 +21,56 @@ async function getNativeCoordinates() {
   if (!Geolocation) {
     throw new Error("Capacitor Geolocation plugin unavailable");
   }
+
   try {
-    const permStatus = await Geolocation.checkPermissions();
-    if (permStatus?.location !== "granted") {
+    const status = await Geolocation.checkPermissions();
+    if (status?.location !== "granted" && status?.coarseLocation !== "granted") {
       await Geolocation.requestPermissions();
     }
   } catch (err) {
     console.warn("Capacitor permissions request note:", err);
   }
-  const pos = await Geolocation.getCurrentPosition({
+
+  // 1. Try high accuracy first (GPS satellites)
+  try {
+    const pos = await Geolocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 8000,
+      maximumAge: 60000,
+    });
+    if (pos?.coords) return pos.coords;
+  } catch (gpsErr) {
+    console.warn("Native GPS high accuracy failed, falling back to network cell tower location:", gpsErr);
+  }
+
+  // 2. Fallback to low accuracy (Wi-Fi / Cell tower)
+  const pos2 = await Geolocation.getCurrentPosition({
     enableHighAccuracy: false,
     timeout: 10000,
-    maximumAge: 600000,
+    maximumAge: 300000,
   });
-  return pos.coords;
+  return pos2.coords;
 }
 
 export async function requestBrowserLocation() {
   const isNative = Boolean(
     typeof window !== "undefined" &&
-    window.Capacitor &&
-    (window.Capacitor.isNativePlatform?.() || window.Capacitor.isNative) &&
-    window.Capacitor.Plugins?.Geolocation
+      window.Capacitor &&
+      (window.Capacitor.isNativePlatform?.() || window.Capacitor.isNative) &&
+      window.Capacitor.Plugins?.Geolocation
   );
 
-  let coords;
+  let coords = null;
+
   if (isNative) {
-    coords = await getNativeCoordinates();
-  } else {
+    try {
+      coords = await getNativeCoordinates();
+    } catch (nativeErr) {
+      console.warn("Native geolocation failed, attempting standard navigator.geolocation:", nativeErr);
+    }
+  }
+
+  if (!coords) {
     if (!navigator.geolocation) {
       throw new Error("Geolocation is not supported by your browser");
     }
@@ -57,15 +79,17 @@ export async function requestBrowserLocation() {
         (pos) => resolve(pos.coords),
         (err) => reject(err),
         {
-          enableHighAccuracy: false,
+          enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 600000, // 10 minutes cache
+          maximumAge: 120000,
         }
       );
     });
   }
 
-  const { latitude, longitude } = coords;
+  const latitude = coords.latitude;
+  const longitude = coords.longitude;
+
   try {
     // Reverse geocode to acquire clean City, State, Country
     const geo = await api.reverseGeocode(latitude, longitude);
@@ -95,19 +119,21 @@ export async function getFallbackLocation() {
   // 1. Try IP Geolocation
   try {
     const ipLoc = await api.locateByIp();
-    if (ipLoc && ipLoc.latitude && ipLoc.longitude) {
+    const lat = ipLoc?.latitude ?? ipLoc?.lat;
+    const lon = ipLoc?.longitude ?? ipLoc?.lon;
+    if (lat != null && lon != null && !isNaN(Number(lat)) && !isNaN(Number(lon))) {
       return {
-        name: ipLoc.city,
-        state: ipLoc.state,
-        country: ipLoc.country,
-        lat: ipLoc.latitude,
-        lon: ipLoc.longitude,
+        name: ipLoc.city || "Current Location",
+        state: ipLoc.state || null,
+        country: ipLoc.country || "India",
+        lat: Number(lat),
+        lon: Number(lon),
         isApproximate: true,
         source: "ip",
       };
     }
-  } catch {
-    // Continue to saved or default
+  } catch (err) {
+    console.warn("IP geolocation fallback failed:", err);
   }
 
   // 2. Try last saved location from store
